@@ -29,6 +29,21 @@ namespace PokemonTrainerSimulator
             Level++;
             Console.WriteLine($"{Name} leveled up to {Level}!");
         }
+        protected string PerformAttack()
+        {
+            for (int i = 0; i < Attacks.Count; i++)
+            {
+                Console.WriteLine($"{i}: {Attacks[i]}");
+            }
+
+            Console.Write("Choose an attack: ");
+            if (!int.TryParse(Console.ReadLine(), out int choice) || choice < 0 || choice >= Attacks.Count)
+            {
+                return $"{Name} failed to attack due to invalid input.";
+            }
+             
+            return Attacks[choice].Use(Level);
+        }
 
         protected void PerformEvolution(string newName)
         {

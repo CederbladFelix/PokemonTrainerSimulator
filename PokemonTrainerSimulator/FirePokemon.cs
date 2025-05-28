@@ -14,9 +14,7 @@ namespace PokemonTrainerSimulator
 
         public override string Attack()
         {
-            Console.WriteLine("Write out attacks");
-            int choice = 0;
-            return Attacks[choice].Use(Level);
+            return PerformAttack();
         }
     }
 }

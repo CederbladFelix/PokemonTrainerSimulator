@@ -23,5 +23,9 @@ namespace PokemonTrainerSimulator
         {
             return $"{Name} hits with total power {BasePower + level}!";
         }
+        public override string ToString()
+        {
+            return $"Name: {Name} Type: {Type} Base Power: {BasePower} ";
+        }
     }
 }
