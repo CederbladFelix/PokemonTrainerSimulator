@@ -8,9 +8,10 @@ namespace PokemonTrainerSimulator
 {
     internal abstract class Pokemon
     {
+        private static readonly Random rng = new Random();
         protected List<Attack> Attacks;
-        private string name;
-        private int level;
+        private string name = string.Empty;
+        private int level = 0;
 
         public string Name 
         { 
@@ -36,7 +37,7 @@ namespace PokemonTrainerSimulator
                 level = value;
             }
         }
-        public ElementType Type { get; }
+        public ElementType Type { get; private set; }
 
         protected Pokemon(List<Attack> attacks, string name, int level, ElementType type)
         {
@@ -48,8 +49,7 @@ namespace PokemonTrainerSimulator
 
         public void RandomAttack()
         {
-            int randomAttack = new Random().Next(Attacks.Count);
-
+            int randomAttack = rng.Next(Attacks.Count);
             Attacks[randomAttack].Use(Level);
         }
 
@@ -64,6 +64,7 @@ namespace PokemonTrainerSimulator
             if (!int.TryParse(Console.ReadLine(), out int choice) || choice < 0 || choice >= Attacks.Count)
             {
                 Console.WriteLine($"{Name} failed to attack due to invalid input.");
+                return;
             }
 
             Attacks[choice].Use(Level);
