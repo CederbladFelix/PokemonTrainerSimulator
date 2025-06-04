@@ -8,13 +8,8 @@ namespace PokemonTrainerSimulator
 {
     internal class FirePokemon : Pokemon
     {
-        public FirePokemon(List<Attack> attacks, string name, int level) : base(attacks, name, level, Type.Fire)
+        protected FirePokemon(List<Attack> attacks, string name, int level) : base(attacks, name, level, ElementType.Fire)
         {
-        }
-
-        public override string Attack()
-        {
-            return PerformAttack();
         }
     }
 }

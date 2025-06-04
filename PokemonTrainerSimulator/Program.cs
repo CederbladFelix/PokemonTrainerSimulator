@@ -5,14 +5,14 @@
         static void Main(string[] args)
         {
 
-            var flamethrower = new Attack("Flamethrower", Type.Fire, 12);
-            var ember = new Attack("Ember", Type.Fire, 6);
+            var flamethrower = new Attack("Flamethrower", ElementType.Fire, 12);
+            var ember = new Attack("Ember", ElementType.Fire, 6);
 
-            var waterGun = new Attack("Water Gun", Type.Water, 12);
-            var waterPulse = new Attack("Water Pulse", Type.Water, 6);
+            var waterGun = new Attack("Water Gun", ElementType.Water, 12);
+            var waterPulse = new Attack("Water Pulse", ElementType.Water, 6);
 
-            var nuzzle = new Attack("Nuzzle", Type.Electric, 12);
-            var thunderShock = new Attack("Thunder Shock", Type.Electric, 6);
+            var nuzzle = new Attack("Nuzzle", ElementType.Electric, 12);
+            var thunderShock = new Attack("Thunder Shock", ElementType.Electric, 6);
 
             var fireAttacks = new List<Attack>() { flamethrower, ember };
             var waterAttacks = new List<Attack>() { waterGun, waterPulse };
@@ -26,16 +26,17 @@
 
             pokemonList.AddRange([charamander, squirtle, pikachu]);
 
-            for (int i = 0; i < pokemonList.Count; i++)
+            foreach (var pokemon in pokemonList)
             {
-                pokemonList[i].RaiseLevel();
-                pokemonList[i].Attack();
+                pokemon.RaiseLevel();
+                pokemon.Attack();
 
-                if (pokemonList[i] is IEvolveable evolveable)
+                if (pokemon is IEvolveable evolveable)
                 {
                     evolveable.Evolve();
                 }
             }
+
         }
     }
 }

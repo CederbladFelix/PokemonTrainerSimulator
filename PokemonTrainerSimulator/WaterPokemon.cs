@@ -8,13 +8,9 @@ namespace PokemonTrainerSimulator
 {
     internal class WaterPokemon : Pokemon
     {
-        public WaterPokemon(List<Attack> attacks, string name, int level) : base(attacks, name, level, Type.Water)
+        protected WaterPokemon(List<Attack> attacks, string name, int level) : base(attacks, name, level, ElementType.Water)
         {
         }
 
-        public override string Attack()
-        {
-            return PerformAttack();
-        }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PokemonTrainerSimulator
 {
-    internal enum Type
+    internal enum ElementType
     {
         Fire,
         Water,

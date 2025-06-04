@@ -9,11 +9,36 @@ namespace PokemonTrainerSimulator
     internal abstract class Pokemon
     {
         protected List<Attack> Attacks;
-        public string Name { get; set; } = string.Empty;
-        public int Level { get; set; } = 0;
-        public Type Type { get; }
+        private string name;
+        private int level;
 
-        protected Pokemon(List<Attack> attacks, string name, int level, Type type)
+        public string Name 
+        { 
+            get => name;
+            set
+            {
+                if (value.Length > 15 || value.Length < 2)
+                {
+                    throw new ArgumentException("Name must be between 2 and 15 characters long.");
+                }
+                name = value;
+            } 
+        }
+        public int Level 
+        { 
+            get => level;
+            set 
+            {
+                if (value < 1)
+                {
+                    throw new ArgumentException("Level must be higher than 1.");
+                }
+                level = value;
+            }
+        }
+        public ElementType Type { get; }
+
+        protected Pokemon(List<Attack> attacks, string name, int level, ElementType type)
         {
             Attacks = attacks;
             Name = name;
@@ -21,15 +46,14 @@ namespace PokemonTrainerSimulator
             Type = type;
         }
 
-
-        public abstract string Attack();
-
-        public void RaiseLevel()
+        public void RandomAttack()
         {
-            Level++;
-            Console.WriteLine($"{Name} leveled up to {Level}!");
+            int randomAttack = new Random().Next(Attacks.Count);
+
+            Attacks[randomAttack].Use(Level);
         }
-        protected string PerformAttack()
+
+        public void Attack()
         {
             for (int i = 0; i < Attacks.Count; i++)
             {
@@ -39,10 +63,16 @@ namespace PokemonTrainerSimulator
             Console.Write("Choose an attack: ");
             if (!int.TryParse(Console.ReadLine(), out int choice) || choice < 0 || choice >= Attacks.Count)
             {
-                return $"{Name} failed to attack due to invalid input.";
+                Console.WriteLine($"{Name} failed to attack due to invalid input.");
             }
-             
-            return Attacks[choice].Use(Level);
+
+            Attacks[choice].Use(Level);
+        }
+
+        public void RaiseLevel()
+        {
+            Level++;
+            Console.WriteLine($"{Name} leveled up to {Level}!");
         }
 
         protected void PerformEvolution(string newName)

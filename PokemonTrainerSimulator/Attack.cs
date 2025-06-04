@@ -6,22 +6,15 @@ using System.Threading.Tasks;
 
 namespace PokemonTrainerSimulator
 {
-    internal class Attack
+    internal class Attack(string name, ElementType type, int basePower)
     {
-        public string Name;
-        public Type Type;
-        public int BasePower;
+        public string Name { get; } = name;
+        public ElementType Type { get; } = type;
+        public int BasePower { get; } = basePower;
 
-        public Attack(string name, Type type, int basePower)
+        public void Use(int level)
         {
-            Name = name;
-            Type = type;
-            BasePower = basePower;
-        }
-
-        public string Use(int level)
-        {
-            return $"{Name} hits with total power {BasePower + level}!";
+            Console.WriteLine($"{Name} hits with total power {BasePower + level}!");
         }
         public override string ToString()
         {
